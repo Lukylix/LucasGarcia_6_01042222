@@ -40,3 +40,12 @@ function closeCarouselModal() {
 	const modal = document.getElementById("carousel_modal");
 	modal.style.display = "none";
 }
+
+document.querySelector("body").addEventListener("keydown", (e) => {
+	if (e.key === "ArrowLeft") {
+		prev.click();
+	}
+	if (e.key === "ArrowRight") {
+		next.click();
+	}
+});
