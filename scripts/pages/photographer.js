@@ -7,6 +7,10 @@ async function getPhotographer() {
 	photographers.photographer = photographers.photographers.filter((photographer) => photographer.id == id)[0];
 	delete photographers.photographers;
 	photographers.media = photographers.media.filter((media) => media.photographerId == id);
+	photographers.media = photographers.media.map((media) => {
+		if (likesToIncrement[media.id]) media.likes += likesToIncrement[media.id];
+		return media;
+	});
 	photographers.media = photographers.media.sort((a, b) => b.likes - a.likes);
 	return photographers;
 }
@@ -21,10 +25,12 @@ async function displayHeader(photographer) {
 	photographerHeader.appendChild(profilPictureDom);
 }
 
-async function displayInfoBar(photographer) {
+async function displayInfoBar(data) {
 	const main = document.querySelector("#main");
+	const infoBar = document.querySelector(".info_bar");
+	if (infoBar) infoBar.remove();
 
-	const infoBarModel = infoBarFactory(photographer);
+	const infoBarModel = infoBarFactory(data);
 	const infoBarDom = infoBarModel.getInfoBarDom();
 	main.appendChild(infoBarDom);
 }
@@ -64,6 +70,28 @@ async function displayContactName(photographer) {
 	const contactName = document.createElement("text");
 	contactName.textContent = " " + photographer.name;
 	modalTitle.appendChild(contactName);
+}
+
+const likesToIncrement = {};
+
+async function incrementLikes(mediaId) {
+	if (!likesToIncrement[mediaId]) likesToIncrement[mediaId] = 0;
+	likesToIncrement[mediaId] += 1;
+
+	// Get order by
+	let orderBy = "";
+	const customSelectInputs = document.querySelectorAll(".custom_select input");
+	for (const input of customSelectInputs) {
+		if (input.checked) {
+			orderBy = input.id;
+			break;
+		}
+	}
+
+	const data = await getPhotographer();
+	const { photographer, media } = data;
+	displayInfoBar(data);
+	changeMediaOrder(orderBy);
 }
 
 async function init() {

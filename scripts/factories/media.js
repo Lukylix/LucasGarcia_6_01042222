@@ -1,5 +1,5 @@
 function mediaFactory(media, name, index) {
-	const { title, image, likes, video } = media;
+	const { title, image, likes, video, id } = media;
 
 	const directory = name.split(" ")[0];
 	const picture = `assets/medias/${directory}/${image}`;
@@ -32,6 +32,7 @@ function mediaFactory(media, name, index) {
 		mediaLikes.textContent = likes + " ";
 		const heart = document.createElement("i");
 		heart.className = "fas fa-heart";
+		heart.setAttribute("onclick", `incrementLikes(${id})`);
 		mediaLikes.appendChild(heart);
 
 		if (!!image) link.appendChild(mediaImg);
