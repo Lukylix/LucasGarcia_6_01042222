@@ -78,7 +78,6 @@ async function incrementLikes(mediaId) {
 	if (!likesToIncrement[mediaId]) likesToIncrement[mediaId] = 0;
 	likesToIncrement[mediaId] += 1;
 
-	// Get order by
 	let orderBy = "";
 	const customSelectInputs = document.querySelectorAll(".custom_select input");
 	for (const input of customSelectInputs) {

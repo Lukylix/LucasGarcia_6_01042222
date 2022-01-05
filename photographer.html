@@ -10,13 +10,13 @@
 	</head>
 	<body>
 		<header>
-			<a href="./index.html">
+			<a href="./index.html" aria-label="Fisheye Home page">
 				<img src="assets/images/logo.png" class="logo" />
 			</a>
 		</header>
 		<main id="main">
 			<div class="photograph-header">
-				<button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+				<button class="contact_button" aria-label="Contact Me" onclick="displayModal()">Contactez-moi</button>
 			</div>
 			<label>Trier par</label>
 
@@ -31,19 +31,21 @@
 			</div>
 			<section id="media-section"></section>
 			<div id="carousel_modal" onclick="closeCarouselModal()">
-				<div class="carousel" onclick="event.stopPropagation()">
-					<button id="prev"><i class="fas fa-chevron-left"></i></button>
+				<dialog class="carousel" aria-level="Image closeup view" onclick="event.stopPropagation()">
+					<button id="prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
 					<div class="card-container"></div>
-					<button id="next"><i class="fas fa-chevron-right"></i></button>
-					<button id="close" onclick="closeCarouselModal()"><i class="fas fa-times"></i></button>
-				</div>
+					<button id="next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+					<button id="close" aria-label="Close dialog" onclick="closeCarouselModal()">
+						<i class="fas fa-times"></i>
+					</button>
+				</dialog>
 			</div>
 		</main>
 		<div id="contact_modal" onclick="closeModal()">
-			<div class="modal" onclick="event.stopPropagation()">
+			<dialog class="modal" aria-labelledby="contactTitle" onclick="event.stopPropagation()">
 				<header>
-					<h2>Contactez-moi</h2>
-					<img src="assets/icons/close.svg" onclick="closeModal()" />
+					<h2 id="contactTitle">Contactez-moi</h2>
+					<img src="assets/icons/close.svg" alt="Close Contact form" onclick="closeModal()" />
 				</header>
 				<form>
 					<div>
@@ -58,7 +60,7 @@
 					</div>
 					<button class="contact_button">Envoyer</button>
 				</form>
-			</div>
+			</dialog>
 		</div>
 		<script src="/scripts/factories/header.js"></script>
 		<script src="/scripts/factories/infoBar.js"></script>

@@ -177,8 +177,11 @@
 	padding: 5px 0;
 }
 
-#media-section figcaption .fa-heart {
+#media-section figcaption button {
 	cursor: pointer;
+	color: #901c1c;
+	background-color: transparent;
+	border: none;
 }
 
 .contact_button {

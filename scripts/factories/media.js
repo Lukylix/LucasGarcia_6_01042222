@@ -11,6 +11,7 @@ function mediaFactory(media, name, index) {
 		const link = document.createElement("a");
 		link.href = `javascript:void(0)`;
 		link.setAttribute("onclick", `onpenCarouselAt(${index})`);
+		link.setAttribute("aria-label", `${title}, closeup view`);
 
 		let mediaImg;
 		if (!!image) {
@@ -28,11 +29,13 @@ function mediaFactory(media, name, index) {
 		const mediaCaption = document.createElement("figcaption");
 		const mediaTitle = document.createElement("p");
 		mediaTitle.textContent = title;
-		const mediaLikes = document.createElement("p");
+		const mediaLikes = document.createElement("button");
 		mediaLikes.textContent = likes + " ";
+		mediaLikes.setAttribute("onclick", `incrementLikes(${id})`);
+		mediaLikes.setAttribute("aria-label", `${title}, likes`);
 		const heart = document.createElement("i");
 		heart.className = "fas fa-heart";
-		heart.setAttribute("onclick", `incrementLikes(${id})`);
+		// heart.setAttribute("onclick", `incrementLikes(${id})`);
 		mediaLikes.appendChild(heart);
 
 		if (!!image) link.appendChild(mediaImg);
@@ -53,12 +56,14 @@ function mediaFactory(media, name, index) {
 		if (!!image) {
 			img = document.createElement("img");
 			img.setAttribute("src", picture);
+			img.setAttribute("alt", title);
 		}
 		let mediaVideo;
 		if (!!video) {
 			mediaVideo = document.createElement("video");
 			mediaVideo.setAttribute("src", videoSrc);
 			mediaVideo.setAttribute("controls", "");
+			mediaVideo.setAttribute("alt", title);
 		}
 		mediaCaption.appendChild(mediaTitle);
 		if (!!image) mediaCard.appendChild(img);

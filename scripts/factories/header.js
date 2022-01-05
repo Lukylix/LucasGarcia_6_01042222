@@ -6,6 +6,7 @@ function headerFactory(data) {
 	function getProfilPictureDOM() {
 		const img = document.createElement("img");
 		img.setAttribute("src", picture);
+		img.setAttribute("alt", name);
 		return img;
 	}
 	function getProfilDescriptionDom() {
