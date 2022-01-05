@@ -1,36 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
+	<head>
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.css" />
+		<title>Fisheye - photographe</title>
+	</head>
+	<body>
+		<header>
+			<a href="./index.html">
+				<img src="assets/images/logo.png" class="logo" />
+			</a>
+		</header>
+		<main id="main">
+			<div class="photograph-header">
+				<button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+			</div>
+			<label>Trier par</label>
+
+			<div class="custom_select" tabindex="1">
+				<input name="sortBy" type="radio" id="Popularité" checked />
+				<label onclick="changeMediaOrder('Popularité');" for="Popularité" class="option">Popularité</label>
+				<input name="sortBy" type="radio" id="Date" />
+				<label onclick="changeMediaOrder('Date');" for="Date" class="option">Date</label>
+				<input name="sortBy" type="radio" id="Titre" />
+				<label onclick="changeMediaOrder('Titre');" for="Titre" class="option">Titre</label>
+				<span class="arrow"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></span>
+			</div>
+			<section id="media-section"></section>
+			<div id="carousel_modal" onclick="closeCarouselModal()">
+				<div class="carousel" onclick="event.stopPropagation()">
+					<button id="prev"><i class="fas fa-chevron-left"></i></button>
+					<div class="card-container"></div>
+					<button id="next"><i class="fas fa-chevron-right"></i></button>
+					<button id="close" onclick="closeCarouselModal()"><i class="fas fa-times"></i></button>
+				</div>
+			</div>
+		</main>
+		<div id="contact_modal" onclick="closeModal()">
+			<div class="modal" onclick="event.stopPropagation()">
 				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
+					<h2>Contactez-moi</h2>
+					<img src="assets/icons/close.svg" onclick="closeModal()" />
+				</header>
 				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<label for="first">Prénom</label>
+						<input type="text" id="first" name="first" minlength="2" required="required" />
+						<label for="last">Nom</label>
+						<input type="text" id="last" name="last" minlength="2" required="required" />
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" required="required" />
+						<label for="message">Message</label>
+						<textarea name="message" id="message" rows="8"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+					<button class="contact_button">Envoyer</button>
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+		<script src="/scripts/factories/header.js"></script>
+		<script src="/scripts/factories/infoBar.js"></script>
+		<script src="/scripts/factories/media.js"></script>
+		<script src="/scripts/pages/photographer.js"></script>
+		<script src="/scripts/components/carousel.js"></script>
+		<script src="/scripts/utils/contactForm.js"></script>
+	</body>
 </html>
