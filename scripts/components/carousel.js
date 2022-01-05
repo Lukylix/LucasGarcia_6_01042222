@@ -42,10 +42,7 @@ function closeCarouselModal() {
 }
 
 document.querySelector("body").addEventListener("keydown", (e) => {
-	if (e.key === "ArrowLeft") {
-		prev.click();
-	}
-	if (e.key === "ArrowRight") {
-		next.click();
-	}
+	if (e.key === "ArrowLeft") prev.click();
+	if (e.key === "ArrowRight") next.click();
+	if (e.key === "Escape") closeCarouselModal();
 });
