@@ -1,18 +1,19 @@
-async function getPhotographer() {
-	let photographers = await fetch("../../data/photographers.json");
-	photographers = await photographers.json();
-	const urlParams = new URLSearchParams(window.location.search);
-	const id = urlParams.get("id");
+let photographersData;
 
-	photographers.photographer = photographers.photographers.filter((photographer) => photographer.id == id)[0];
-	delete photographers.photographers;
-	photographers.media = photographers.media.filter((media) => media.photographerId == id);
-	photographers.media = photographers.media.map((media) => {
-		if (likesToIncrement[media.id]) media.likes += likesToIncrement[media.id];
-		return media;
-	});
-	photographers.media = photographers.media.sort((a, b) => b.likes - a.likes);
-	return photographers;
+async function getPhotographer() {
+	if (!photographersData) {
+		const urlParams = new URLSearchParams(window.location.search);
+		const id = urlParams.get("id");
+		console.log("Fetch json");
+		let photographersJson = await fetch("../../data/photographers.json");
+		photographersData = await photographersJson.json();
+		photographersData.photographer = photographersData.photographers.filter((photographer) => photographer.id == id)[0];
+		delete photographersData.photographers;
+		photographersData.media = photographersData.media.filter((media) => media.photographerId == id);
+	}
+
+	photographersData.media.sort((a, b) => b.likes - a.likes);
+	return photographersData;
 }
 
 async function displayHeader(photographer) {
@@ -25,12 +26,12 @@ async function displayHeader(photographer) {
 	photographerHeader.appendChild(profilPictureDom);
 }
 
-async function displayInfoBar(data) {
+async function displayInfoBar(photographer, media) {
 	const main = document.querySelector("#main");
 	const infoBar = document.querySelector(".info_bar");
 	if (infoBar) infoBar.remove();
 
-	const infoBarModel = infoBarFactory(data);
+	const infoBarModel = infoBarFactory(photographer, media);
 	const infoBarDom = infoBarModel.getInfoBarDom();
 	main.appendChild(infoBarDom);
 }
@@ -57,10 +58,14 @@ async function displayMediaCarousel(photographer, media) {
 	});
 }
 
-async function changeMediaOrder(orderBy) {
-	let { photographer, media } = await getPhotographer();
-	if (orderBy === "Date") media = media.sort((a, b) => new Date(b.date) - new Date(a.date));
-	if (orderBy === "Titre") media = media.sort((a, b) => a.title.localeCompare(b.title));
+async function changeMediaOrder(orderBy, photographer, media) {
+	if (!(photographer && media)) {
+		data = await getPhotographer();
+		photographer = data.photographer;
+		media = data.media;
+	}
+	if (orderBy === "Date") media.sort((a, b) => new Date(b.date) - new Date(a.date));
+	if (orderBy === "Titre") media.sort((a, b) => a.title.localeCompare(b.title));
 	displayMedia(photographer, media);
 	displayMediaCarousel(photographer, media);
 }
@@ -72,11 +77,13 @@ async function displayContactName(photographer) {
 	modalTitle.appendChild(contactName);
 }
 
-const likesToIncrement = {};
-
 async function incrementLikes(mediaId) {
-	if (!likesToIncrement[mediaId]) likesToIncrement[mediaId] = 0;
-	likesToIncrement[mediaId] += 1;
+	for (key in photographersData.media) {
+		if (photographersData.media[key].id === mediaId) {
+			photographersData.media[key].likes++;
+			break;
+		}
+	}
 
 	let orderBy = "";
 	const customSelectInputs = document.querySelectorAll(".custom_select input");
@@ -87,18 +94,15 @@ async function incrementLikes(mediaId) {
 		}
 	}
 
-	const data = await getPhotographer();
-	const { photographer, media } = data;
-	displayInfoBar(data);
-	changeMediaOrder(orderBy);
+	const { photographer, media } = await getPhotographer();
+	displayInfoBar(photographer, media);
+	changeMediaOrder(orderBy, photographer, media);
 }
 
 async function init() {
-	// Récupère les datas des photographes
-	const data = await getPhotographer();
-	const { photographer, media } = data;
+	const { photographer, media } = await getPhotographer();
 	displayHeader(photographer);
-	displayInfoBar(data);
+	displayInfoBar(photographer, media);
 	displayMedia(photographer, media);
 	displayMediaCarousel(photographer, media);
 	displayContactName(photographer);

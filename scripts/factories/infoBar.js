@@ -1,6 +1,6 @@
-function infoBarFactory(data) {
-	const { price } = data.photographer;
-	const likes = data.media.reduce((acc, media) => acc + media.likes, 0);
+function infoBarFactory(photographer, media) {
+	const { price } = photographer;
+	const likes = media.reduce((acc, media) => acc + media.likes, 0);
 
 	function getInfoBarDom() {
 		const infoBar = document.createElement("div");

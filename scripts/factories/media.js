@@ -23,7 +23,6 @@ function mediaFactory(media, name, index) {
 		if (!!video) {
 			mediaVideo = document.createElement("video");
 			mediaVideo.setAttribute("src", videoSrc);
-			// mediaVideo.setAttribute("controls", "");
 		}
 
 		const mediaCaption = document.createElement("figcaption");

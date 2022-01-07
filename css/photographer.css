@@ -76,7 +76,7 @@
 	transform: translateX(-50%);
 }
 
-/* .custom_select:focus .option:after {
+.custom_select:focus .option:after {
 	content: "";
 	background-color: white;
 	height: 1px;
@@ -85,7 +85,7 @@
 	bottom: 0px;
 	left: 50%;
 	transform: translateX(-50%);
-} */
+}
 
 .custom_select input[type="radio"] {
 	/* Display none not working */
