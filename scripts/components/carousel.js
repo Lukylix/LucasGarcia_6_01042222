@@ -1,33 +1,33 @@
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 
-prev.addEventListener("click", function () {
-	/* Find the current card */
-	const currCard = document.querySelector(".card.view");
-	/* Set the prevCard based on its availability */
-	const prevCard = currCard.previousElementSibling
-		? currCard.previousElementSibling
-		: document.querySelector(".card-container").lastElementChild;
-	currCard.classList.remove("view");
-	prevCard.classList.add("view");
+let currentCarouselIndex = 0;
+
+prev.addEventListener("click", () => {
+	if (currentCarouselIndex > 0) {
+		onpenCarouselAt(currentCarouselIndex - 1);
+	} else {
+		onpenCarouselAt(photographersData.media.length - 1);
+	}
 });
 
-next.addEventListener("click", function () {
-	/* Find the current card */
-	const currCard = document.querySelector(".card.view");
-	/* Set the nextCard based on its availability */
-	const nextCard = currCard.nextElementSibling
-		? currCard.nextElementSibling
-		: document.querySelector(".card-container").firstElementChild;
-	currCard.classList.remove("view");
-	nextCard.classList.add("view");
+next.addEventListener("click", () => {
+	if (currentCarouselIndex < photographersData.media.length - 1) {
+		onpenCarouselAt(currentCarouselIndex + 1);
+	} else {
+		onpenCarouselAt(0);
+	}
 });
 
 async function onpenCarouselAt(index) {
-	const currCard = document.querySelector(".card.view");
-	const nextCard = document.querySelector(".card-container").children[index];
-	currCard.classList.remove("view");
-	nextCard.classList.add("view");
+	currentCarouselIndex = index;
+	const { name } = photographersData.photographer;
+	const media = photographersData.media[index];
+	const cardContainer = document.querySelector(".card-container");
+	cardContainer.innerHTML = "";
+	const mediaModel = mediaFactory(media, name, index);
+	const mediaCarouselCardDOM = mediaModel.getMediaCarouselCardDOM();
+	cardContainer.appendChild(mediaCarouselCardDOM);
 	displayCarouselModal();
 }
 
