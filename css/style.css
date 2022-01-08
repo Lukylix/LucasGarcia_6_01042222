@@ -1,5 +1,4 @@
 @import url("normalizer.css");
-@import url("photographer.css");
 
 body {
 	font-family: "DM Sans", sans-serif;
@@ -21,14 +20,14 @@ h1 {
 
 .logo {
 	height: 50px;
-	margin-left: 100px;
+	margin-left: 135px;
 }
 
 .photographer_section {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	gap: 70px;
-	margin-top: 100px;
+	margin: 100px 0;
 }
 
 .photographer_section article {
@@ -48,16 +47,17 @@ h1 {
 
 .photographer_section article h2 {
 	color: #d3573c;
-	font-size: 36px;
+	font-size: 43px;
 }
 
 .photographer_section article img {
-	height: 200px;
-	width: 200px;
+	height: 275px;
+	width: 275px;
 	border-radius: 50%;
 }
 
 .photographer_section article p {
+	font-size: 1.2rem;
 	text-align: center;
 }
 

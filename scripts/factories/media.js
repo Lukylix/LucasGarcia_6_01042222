@@ -10,7 +10,7 @@ function mediaFactory(media, name, index) {
 
 		const link = document.createElement("a");
 		link.href = `javascript:void(0)`;
-		link.setAttribute("onclick", `onpenCarouselAt(${index})`);
+		link.addEventListener("click", () => openCarouselAt(index));
 		link.setAttribute("aria-label", `${title}, closeup view`);
 
 		let mediaImg;
@@ -30,11 +30,10 @@ function mediaFactory(media, name, index) {
 		mediaTitle.textContent = title;
 		const mediaLikes = document.createElement("button");
 		mediaLikes.textContent = likes + " ";
-		mediaLikes.setAttribute("onclick", `incrementLikes(${id})`);
+		mediaLikes.addEventListener("click", () => incrementLikes(id));
 		mediaLikes.setAttribute("aria-label", `${title}, likes`);
 		const heart = document.createElement("i");
 		heart.className = "fas fa-heart";
-		// heart.setAttribute("onclick", `incrementLikes(${id})`);
 		mediaLikes.appendChild(heart);
 
 		if (!!image) link.appendChild(mediaImg);

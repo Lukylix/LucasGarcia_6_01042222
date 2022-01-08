@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/photographer.css" rel="stylesheet" type="text/css" />
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="assets/favicon.png" />
 		<link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet" />
@@ -16,36 +16,37 @@
 		</header>
 		<main id="main">
 			<div class="photograph-header">
-				<button class="contact_button" aria-label="Contact Me" onclick="displayModal()">Contactez-moi</button>
+				<button class="contact_button" aria-label="Contact Me">Contactez-moi</button>
 			</div>
-			<label>Trier par</label>
+			<label class="sortByLabel">Trier par</label>
 
-			<div class="custom_select" tabindex="1">
-				<input name="sortBy" type="radio" id="Popularité" checked />
-				<label onclick="changeMediaOrder('Popularité');" for="Popularité" class="option">Popularité</label>
-				<input name="sortBy" type="radio" id="Date" />
-				<label onclick="changeMediaOrder('Date');" for="Date" class="option">Date</label>
-				<input name="sortBy" type="radio" id="Titre" />
-				<label onclick="changeMediaOrder('Titre');" for="Titre" class="option">Titre</label>
-				<span class="arrow"><i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></span>
-			</div>
+			<details id="custom_select" class="select_container">
+				<summary>--</summary>
+				<div class="select">
+					<label class="select__option">
+						<input checked type="radio" name="sortBy" value="Popularité" />Popularité</label
+					>
+					<label class="select__option"> <input type="radio" name="sortBy" value="Date" />Date</label>
+					<label class="select__option"> <input type="radio" name="sortBy" value="Titre" />Titre</label>
+				</div>
+			</details>
 			<section id="media-section"></section>
-			<div id="carousel_modal" onclick="closeCarouselModal()">
-				<dialog class="carousel" aria-level="Image closeup view" onclick="event.stopPropagation()">
+			<div id="carousel_modal">
+				<dialog class="carousel" aria-level="Image closeup view">
 					<button id="prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
 					<div class="card-container"></div>
 					<button id="next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-					<button id="close" aria-label="Close dialog" onclick="closeCarouselModal()">
+					<button id="close" aria-label="Close dialog">
 						<i class="fas fa-times"></i>
 					</button>
 				</dialog>
 			</div>
 		</main>
-		<div id="contact_modal" onclick="closeModal()">
-			<dialog class="modal" aria-labelledby="contactTitle" onclick="event.stopPropagation()">
+		<div id="contact_modal">
+			<dialog class="modal" aria-labelledby="contactTitle">
 				<header>
 					<h2 id="contactTitle">Contactez-moi</h2>
-					<img src="assets/icons/close.svg" alt="Close Contact form" onclick="closeModal()" />
+					<img id="close_contact" src="assets/icons/close.svg" alt="Close Contact form" />
 				</header>
 				<form>
 					<div>
@@ -62,11 +63,12 @@
 				</form>
 			</dialog>
 		</div>
+		<script src="/scripts/components/carousel.js"></script>
 		<script src="/scripts/factories/header.js"></script>
 		<script src="/scripts/factories/infoBar.js"></script>
 		<script src="/scripts/factories/media.js"></script>
 		<script src="/scripts/pages/photographer.js"></script>
-		<script src="/scripts/components/carousel.js"></script>
+		<script src="/scripts/components/customSelect.js"></script>
 		<script src="/scripts/utils/contactForm.js"></script>
 	</body>
 </html>

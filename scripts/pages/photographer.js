@@ -88,6 +88,10 @@ async function incrementLikes(mediaId) {
 }
 
 async function init() {
+	const modals = document.querySelectorAll("dialog");
+	modals.forEach((modal) => {
+		modal.addEventListener("click", (e) => e.stopPropagation());
+	});
 	const { photographer, media } = await getPhotographer();
 	displayHeader(photographer);
 	displayInfoBar(photographer, media);

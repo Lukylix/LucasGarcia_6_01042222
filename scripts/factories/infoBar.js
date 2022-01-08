@@ -6,7 +6,7 @@ function infoBarFactory(photographer, media) {
 		const infoBar = document.createElement("div");
 		infoBar.className = "info_bar";
 		const priceElem = document.createElement("p");
-		priceElem.textContent = `${price}€/jour`;
+		priceElem.textContent = `${price}€ / jour`;
 		const likesElem = document.createElement("p");
 		likesElem.textContent = likes + " ";
 		likesElem.className = "likes";

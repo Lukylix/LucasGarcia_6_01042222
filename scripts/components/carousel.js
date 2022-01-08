@@ -1,25 +1,30 @@
+const carouselModal = document.getElementById("carousel_modal");
+carouselModal.addEventListener("click", closeCarouselModal);
+
+const closeCarousel = document.getElementById("close");
+closeCarousel.addEventListener("click", closeCarouselModal);
+
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 
 let currentCarouselIndex = 0;
-
 prev.addEventListener("click", () => {
 	if (currentCarouselIndex > 0) {
-		onpenCarouselAt(currentCarouselIndex - 1);
+		openCarouselAt(currentCarouselIndex - 1);
 	} else {
-		onpenCarouselAt(photographersData.media.length - 1);
+		openCarouselAt(photographersData.media.length - 1);
 	}
 });
 
 next.addEventListener("click", () => {
 	if (currentCarouselIndex < photographersData.media.length - 1) {
-		onpenCarouselAt(currentCarouselIndex + 1);
+		openCarouselAt(currentCarouselIndex + 1);
 	} else {
-		onpenCarouselAt(0);
+		openCarouselAt(0);
 	}
 });
 
-async function onpenCarouselAt(index) {
+async function openCarouselAt(index) {
 	currentCarouselIndex = index;
 	const { name } = photographersData.photographer;
 	const media = photographersData.media[index];
