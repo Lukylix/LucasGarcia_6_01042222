@@ -4,15 +4,13 @@ async function getPhotographer() {
 	if (!photographersData) {
 		const urlParams = new URLSearchParams(window.location.search);
 		const id = urlParams.get("id");
-		console.log("Fetch json");
 		let photographersJson = await fetch("../../data/photographers.json");
 		photographersData = await photographersJson.json();
 		photographersData.photographer = photographersData.photographers.filter((photographer) => photographer.id == id)[0];
 		delete photographersData.photographers;
 		photographersData.media = photographersData.media.filter((media) => media.photographerId == id);
+		photographersData.media.sort((a, b) => b.likes - a.likes);
 	}
-
-	photographersData.media.sort((a, b) => b.likes - a.likes);
 	return photographersData;
 }
 
@@ -55,6 +53,8 @@ async function changeMediaOrder(orderBy, photographer, media) {
 	}
 	if (orderBy === "Date") media.sort((a, b) => new Date(b.date) - new Date(a.date));
 	if (orderBy === "Titre") media.sort((a, b) => a.title.localeCompare(b.title));
+	// OrderBy Popularité
+	photographersData.media.sort((a, b) => b.likes - a.likes);
 	displayMedia(photographer, media);
 }
 
@@ -66,25 +66,39 @@ async function displayContactName(photographer) {
 }
 
 async function incrementLikes(mediaId) {
-	for (key in photographersData.media) {
-		if (photographersData.media[key].id === mediaId) {
-			photographersData.media[key].likes++;
+	let orderBy = "";
+	const customSelectInputs = document.querySelectorAll("#custom_select input");
+	for (const input of customSelectInputs) {
+		if (input.checked) {
+			orderBy = input.value;
 			break;
 		}
 	}
 
-	let orderBy = "";
-	const customSelectInputs = document.querySelectorAll(".custom_select input");
-	for (const input of customSelectInputs) {
-		if (input.checked) {
-			orderBy = input.id;
+	let orderHasChange = false;
+	for (key in photographersData.media) {
+		if (photographersData.media[key].id === mediaId) {
+			photographersData.media[key].likes++;
+			if (
+				orderBy == "Popularité" &&
+				key > 0 &&
+				photographersData.media[key].likes > photographersData.media[key - 1].likes
+			) {
+				orderHasChange = true;
+			} else {
+				const likeButtonDom = document.querySelectorAll("#media-section figure figcaption button")[key];
+				likeButtonDom.textContent = photographersData.media[key].likes + " ";
+				const heart = document.createElement("i");
+				heart.className = "fas fa-heart";
+				likeButtonDom.appendChild(heart);
+			}
 			break;
 		}
 	}
 
 	const { photographer, media } = await getPhotographer();
 	displayInfoBar(photographer, media);
-	changeMediaOrder(orderBy, photographer, media);
+	if (orderHasChange) changeMediaOrder(orderBy, photographer, media);
 }
 
 async function init() {
