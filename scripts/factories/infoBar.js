@@ -2,7 +2,7 @@ function infoBarFactory(photographer, media) {
 	const { price } = photographer;
 	const likes = media.reduce((acc, media) => acc + media.likes, 0);
 
-	function getInfoBarDom() {
+	function getInfoBarDOM() {
 		const infoBar = document.createElement("div");
 		infoBar.className = "info_bar";
 		const priceElem = document.createElement("p");
@@ -18,5 +18,5 @@ function infoBarFactory(photographer, media) {
 		return infoBar;
 	}
 
-	return { getInfoBarDom };
+	return { getInfoBarDOM };
 }

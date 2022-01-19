@@ -9,7 +9,7 @@ function headerFactory(data) {
 		img.setAttribute("alt", name);
 		return img;
 	}
-	function getProfilDescriptionDom() {
+	function getProfilDescriptionDOM() {
 		const div = document.createElement("div");
 		div.className = "description";
 		const h2 = document.createElement("h1");
@@ -27,5 +27,5 @@ function headerFactory(data) {
 		return div;
 	}
 
-	return { name, picture, getProfilPictureDOM, getProfilDescriptionDom };
+	return { name, picture, getProfilPictureDOM, getProfilDescriptionDOM };
 }

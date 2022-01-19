@@ -18,7 +18,7 @@ async function displayHeader(photographer) {
 	const photographerHeader = document.querySelector(".photograph-header");
 
 	const headerModel = headerFactory(photographer);
-	const profilDescriptionDom = headerModel.getProfilDescriptionDom();
+	const profilDescriptionDom = headerModel.getProfilDescriptionDOM();
 	const profilPictureDom = headerModel.getProfilPictureDOM();
 	photographerHeader.prepend(profilDescriptionDom);
 	photographerHeader.appendChild(profilPictureDom);
@@ -30,7 +30,7 @@ async function displayInfoBar(photographer, media) {
 	if (infoBar) infoBar.remove();
 
 	const infoBarModel = infoBarFactory(photographer, media);
-	const infoBarDom = infoBarModel.getInfoBarDom();
+	const infoBarDom = infoBarModel.getInfoBarDOM();
 	main.appendChild(infoBarDom);
 }
 
@@ -40,7 +40,7 @@ async function displayMedia(photographer, media) {
 	const { name } = photographer;
 	media.forEach((media, index) => {
 		const mediaModel = mediaFactory(media, name, index);
-		const mediaCardDom = mediaModel.getMediaCardDom();
+		const mediaCardDom = mediaModel.getMediaCardDOM();
 		mediaSection.appendChild(mediaCardDom);
 	});
 }

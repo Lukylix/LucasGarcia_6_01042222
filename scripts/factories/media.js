@@ -5,7 +5,7 @@ function mediaFactory(media, name, index) {
 	const picture = `assets/medias/${directory}/${image}`;
 	const videoSrc = `assets/medias/${directory}/${video}`;
 
-	function getMediaCardDom() {
+	function getMediaCardDOM() {
 		const mediaCard = document.createElement("figure");
 
 		const link = document.createElement("a");
@@ -70,5 +70,5 @@ function mediaFactory(media, name, index) {
 		return mediaCard;
 	}
 
-	return { getMediaCardDom, getMediaCarouselCardDOM };
+	return { getMediaCardDOM, getMediaCarouselCardDOM };
 }
