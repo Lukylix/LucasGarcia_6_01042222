@@ -1,108 +1,56 @@
-class detailSelect {
-	constructor(container) {
-		this.container = document.querySelector(container);
-		this.options = document.querySelectorAll(`${container} > .select > .select__option`);
-		this.value = this.container.querySelector("summary").textContent;
-		this.mouseDown = false;
-		this._addEventListeners();
-		this._setAria();
-		this.updateValue();
+const selectButton = document.querySelector("#select-button");
+const select = document.querySelector("#dropdown");
+const options = document.querySelectorAll(".option");
+const selectLabel = document.querySelector("#select-label");
+const labelsSelect = document.querySelectorAll(".dropdown label");
+const lastLabelSelect = document.querySelector(".dropdown label:last-child");
+
+lastLabelSelect.addEventListener("keydown", (e) => {
+	if (e.key === "Tab") {
+		hide();
 	}
+});
 
-	// Private function to set event listeners
-	_addEventListeners() {
-		this.container.addEventListener("change", (e) => {
-			changeMediaOrder(this.value.trim());
-		});
+document.addEventListener("click", (e) => {
+	hide();
+});
 
-		this.container.addEventListener("toggle", () => {
-			if (this.container.open) return;
-			this.updateValue();
-		});
+labelsSelect.forEach((label) => {
+	label.addEventListener("keydown", (e) => {
+		if (e.key === "Enter") {
+			e.target.id = e.target.htmlFor;
+			const radioButton = document.querySelector(`input[id="${e.target.htmlFor}"]`);
+			radioButton.checked = true;
+			radioButton.dispatchEvent(new Event("change"));
+			setSelectTitle(e);
+		}
+	});
+});
 
-		this.container.addEventListener("focusout", (e) => {
-			if (this.mouseDown) return;
-			this.container.removeAttribute("open");
-		});
+selectButton.addEventListener("click", (e) => {
+	e.stopPropagation();
+	show();
+});
 
-		this.options.forEach((opt) => {
-			opt.addEventListener("mousedown", () => {
-				this.mouseDown = true;
-			});
-			opt.addEventListener("mouseup", () => {
-				this.mouseDown = false;
-				this.container.removeAttribute("open");
-			});
-		});
-
-		this.container.addEventListener("keyup", (e) => {
-			const keycode = e.which;
-			const current = [...this.options].indexOf(this.container.querySelector(".active"));
-			switch (keycode) {
-				case 27: // ESC
-					this.container.removeAttribute("open");
-					break;
-				case 35: // END
-					e.preventDefault();
-					if (!this.container.open) this.container.setAttribute("open", "");
-					this.setChecked(this.options[this.options.length - 1].querySelector("input"));
-					break;
-				case 36: // HOME
-					e.preventDefault();
-					if (!this.container.open) this.container.setAttribute("open", "");
-					this.setChecked(this.options[0].querySelector("input"));
-					break;
-				case 38: // UP
-					e.preventDefault();
-					if (!this.container.open) this.container.setAttribute("open", "");
-					this.setChecked(this.options[current > 0 ? current - 1 : 0].querySelector("input"));
-					break;
-				case 40: // DOWN
-					e.preventDefault();
-					if (!this.container.open) this.container.setAttribute("open", "");
-					this.setChecked(
-						this.options[current < this.options.length - 1 ? current + 1 : this.options.length - 1].querySelector(
-							"input"
-						)
-					);
-					break;
-			}
-		});
-	}
-
-	_setAria() {
-		this.container.setAttribute("aria-haspopup", "listbox");
-		const selectBox = this.container.querySelector(".select");
-		selectBox.setAttribute("role", "listbox");
-		selectBox.querySelector("[type=radio]").setAttribute("role", "option");
-	}
-
-	updateValue(e) {
-		const that = this.container.querySelector("input:checked");
-		if (!that) return;
-		this.setValue(that);
-	}
-
-	setChecked(that) {
-		that.checked = true;
-		this.setValue(that);
-	}
-
-	setValue(that) {
-		if (this.value == that.value) return;
-		const arrowIcon = document.createElement("i");
-		arrowIcon.classList = "fas fa-chevron-down";
-		this.container.querySelector("summary").textContent = that.parentNode.textContent;
-		this.container.querySelector("summary").appendChild(arrowIcon);
-		this.value = that.value;
-
-		this.options.forEach((opt) => {
-			opt.classList.remove("active");
-		});
-		that.parentNode.classList.add("active");
-
-		this.container.dispatchEvent(new Event("change"));
-	}
+function show() {
+	select.classList.remove("hidden");
+	selectButton.classList.add("active");
 }
 
-const details = new detailSelect("#custom_select");
+function hide() {
+	select.classList.add("hidden");
+	selectButton.classList.remove("active");
+}
+
+options.forEach((option) => {
+	option.addEventListener("change", (e) => {
+		setSelectTitle(e);
+		changeMediaOrder(e.target.value);
+	});
+});
+
+function setSelectTitle(e) {
+	const labelElement = document.querySelector(`label[for="${e.target.id}"]`).innerText;
+	selectLabel.innerText = labelElement;
+	hide();
+}

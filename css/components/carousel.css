@@ -46,12 +46,13 @@
 
 .carousel #close {
 	position: absolute;
-	right: 0;
-	top: -10px;
+	right: 15px;
+	top: 10px;
 }
 
 .carousel figcaption {
-	padding: 10px;
+	padding: 10px 0;
 	font-weight: bold;
+	font-size: 28px;
 	color: #901c1c;
 }

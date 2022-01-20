@@ -18,18 +18,25 @@
 			<div class="photograph-header">
 				<button class="contact_button" aria-label="Contact Me">Contactez-moi</button>
 			</div>
-			<label class="sortByLabel">Trier par</label>
+			<label for="select-button">Trier par :</label>
+			<div class="custom-select">
+				<button type="button" id="select-button" class="select-button">
+					<span id="select-label">Popularité</span>
+					<i class="fas fa-chevron-down"></i>
+				</button>
 
-			<details id="custom_select" class="select_container">
-				<summary>--</summary>
-				<div class="select">
-					<label class="select__option">
-						<input checked type="radio" name="sortBy" value="Popularité" />Popularité</label
-					>
-					<label class="select__option"> <input type="radio" name="sortBy" value="Date" />Date</label>
-					<label class="select__option"> <input type="radio" name="sortBy" value="Titre" />Titre</label>
+				<div class="dropdown hidden" id="dropdown">
+					<input type="radio" id="select-popularité" name="sortBy" value="Popularité" class="option" checked />
+					<label tabindex="0" for="select-popularité" class="select-item">Popularité</label>
+
+					<input type="radio" id="select-date" name="sortBy" value="Date" class="option" />
+					<label tabindex="0" for="select-date" class="select-item">Date</label>
+
+					<input type="radio" id="select-titre" name="sortBy" value="Titre" class="option" />
+					<label tabindex="0" for="select-titre" class="select-item">Titre</label>
 				</div>
-			</details>
+			</div>
+
 			<section id="media-section"></section>
 			<div id="carousel_modal">
 				<dialog class="carousel" aria-level="Image closeup view">

@@ -53,15 +53,16 @@ async function changeMediaOrder(orderBy, photographer, media) {
 	}
 	if (orderBy === "Date") media.sort((a, b) => new Date(b.date) - new Date(a.date));
 	if (orderBy === "Titre") media.sort((a, b) => a.title.localeCompare(b.title));
-	// OrderBy Popularité
-	photographersData.media.sort((a, b) => b.likes - a.likes);
+	if (orderBy === "Popularité") media.sort((a, b) => b.likes - a.likes);
 	displayMedia(photographer, media);
 }
 
 async function displayContactName(photographer) {
 	const modalTitle = document.querySelector("#contact_modal header h2");
 	const contactName = document.createElement("text");
-	contactName.textContent = " " + photographer.name;
+	const br = document.createElement("br");
+	contactName.textContent = photographer.name;
+	modalTitle.appendChild(br);
 	modalTitle.appendChild(contactName);
 }
 

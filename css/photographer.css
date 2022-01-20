@@ -89,6 +89,7 @@ h1 {
 #media-section figure {
 	height: 462px;
 }
+
 #media-section figure img {
 	height: calc(100% - 50px);
 	width: 100%;

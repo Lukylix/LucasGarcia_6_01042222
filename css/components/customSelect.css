@@ -1,16 +1,43 @@
-details.select_container {
+.custom-select input {
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 0.3rem;
+	height: 3.2rem;
+	padding: 1rem;
+}
+
+.custom-select input[type="radio"]:checked + label {
+	display: none;
+}
+
+label[for="select-button"] {
 	display: inline-block;
-	width: 200px;
-	position: relative;
-	z-index: 1;
 	font-size: 24px;
 }
 
-details.select_container[open] summary {
-	border-radius: 5px 5px 0 0;
+.custom-select {
+	display: inline-block;
 }
 
-details.select_container summary i {
+.select-button {
+	display: flex;
+	padding: 15px 15px;
+	justify-content: space-between;
+	border-radius: 0.3rem;
+	width: 200px;
+	background-color: #901c1c;
+	color: white;
+	border: none;
+	position: relative;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+.select-button.active {
+	border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.select-button i {
 	position: absolute;
 	right: 15px;
 	top: calc(50%);
@@ -18,45 +45,38 @@ details.select_container summary i {
 	pointer-events: none;
 }
 
-details.select_container[open] summary i {
+.select-button.active i {
 	transform: translateY(-50%) rotate(180deg);
 }
 
-details.select_container summary {
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 15px 15px;
-	background: #901c1c;
-	list-style: none;
+.dropdown {
+	position: absolute;
+	width: 100%;
+	background-color: #901c1c;
 	color: white;
+	border-radius: 0 0 0.3rem 0.3rem;
+	overflow: hidden;
+	z-index: 10;
+	font-size: 24px;
 }
 
-details.select_container summary::-webkit-details-marker {
+.option {
 	display: none;
 }
 
-details.select_container summary:hover {
-	background: #db8876;
-}
-
-details.select_container .select {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	border-radius: 0 0 5px 5px;
-	overflow: hidden;
-	background: #901c1c;
-	color: white;
-}
-
-details.select_container .select__option {
-	position: relative;
+.select-item {
+	display: block;
+	padding: 1rem;
+	font-weight: 400;
 	cursor: pointer;
-	padding: 15px 15px;
 }
 
-details.select_container .select__option:after {
+.select-item:focus-visible {
+	outline: none;
+	background-color: #db8876;
+}
+
+.select-item::after {
 	content: "";
 	background-color: white;
 	height: 1px;
@@ -68,17 +88,10 @@ details.select_container .select__option:after {
 	transform: translateX(-50%);
 }
 
-details.select_container .select__option.active {
-	display: none;
+.select-item:hover {
+	background-color: #db8876;
 }
 
-/* details.select_container .select__option.active, */
-details.select_container .select:hover .select__option.active:hover,
-details.select_container .select__option:hover {
-	background: #db8876;
-	color: white;
-}
-
-details.select_container .select__option input {
+.hidden {
 	display: none;
 }
