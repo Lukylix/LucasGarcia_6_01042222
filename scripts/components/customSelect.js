@@ -11,9 +11,7 @@ lastLabelSelect.addEventListener("keydown", (e) => {
 	}
 });
 
-document.addEventListener("click", (e) => {
-	hide();
-});
+document.addEventListener("click", () => hide());
 
 labelsSelect.forEach((label) => {
 	label.addEventListener("keydown", (e) => {

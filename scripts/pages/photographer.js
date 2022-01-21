@@ -77,7 +77,7 @@ async function incrementLikes(mediaId) {
 	}
 
 	let orderHasChange = false;
-	for (key in photographersData.media) {
+	for (const key in photographersData.media) {
 		if (photographersData.media[key].id === mediaId) {
 			photographersData.media[key].likes++;
 			if (
