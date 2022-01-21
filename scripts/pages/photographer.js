@@ -47,7 +47,7 @@ async function displayMedia(photographer, media) {
 
 async function changeMediaOrder(orderBy, photographer, media) {
 	if (!(photographer && media)) {
-		data = await getPhotographer();
+		const data = await getPhotographer();
 		photographer = data.photographer;
 		media = data.media;
 	}
