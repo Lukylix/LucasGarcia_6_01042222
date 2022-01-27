@@ -68,13 +68,14 @@ async function displayContactName(photographer) {
 
 async function incrementLikes(mediaId) {
 	let orderBy = "";
-	const customSelectInputs = document.querySelectorAll("#custom_select input");
+	const customSelectInputs = document.querySelectorAll(".custom-select input[type=radio]");
 	for (const input of customSelectInputs) {
 		if (input.checked) {
 			orderBy = input.value;
 			break;
 		}
 	}
+	console.log(orderBy);
 
 	let orderHasChange = false;
 	for (const key in photographersData.media) {
