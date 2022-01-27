@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 function mediaFactory(media, name, index) {
 	const { title, image, likes, video, id } = media;
 
