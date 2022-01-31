@@ -75,7 +75,6 @@ async function incrementLikes(mediaId) {
 			break;
 		}
 	}
-	console.log(orderBy);
 
 	let orderHasChange = false;
 	for (const key in photographersData.media) {

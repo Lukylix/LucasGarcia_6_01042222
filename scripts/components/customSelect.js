@@ -42,8 +42,12 @@ function hide() {
 
 options.forEach((option) => {
 	option.addEventListener("change", (e) => {
-		setSelectTitle(e);
-		changeMediaOrder(e.target.value);
+		const input = e.target;
+		// Prevent double-firing of change event
+		if (input.checked) {
+			setSelectTitle(e);
+			changeMediaOrder(e.target.value);
+		}
 	});
 });
 
