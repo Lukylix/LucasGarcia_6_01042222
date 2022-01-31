@@ -37,7 +37,8 @@ label[for="select-button"] {
 	border-radius: 0.3rem 0.3rem 0 0;
 }
 
-.select-button i {
+.select-button .fas,
+.select-button .far {
 	position: absolute;
 	right: 15px;
 	top: calc(50%);
@@ -45,7 +46,8 @@ label[for="select-button"] {
 	pointer-events: none;
 }
 
-.select-button.active i {
+.select-button.active .fas,
+.select-button.active .far {
 	transform: translateY(-50%) rotate(180deg);
 }
 

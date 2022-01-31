@@ -89,7 +89,7 @@ async function incrementLikes(mediaId) {
 			} else {
 				const likeButtonDom = document.querySelectorAll("#media-section figure figcaption button")[key];
 				likeButtonDom.textContent = photographersData.media[key].likes + " ";
-				const heart = document.createElement("i");
+				const heart = document.createElement("span");
 				heart.className = "fas fa-heart";
 				likeButtonDom.appendChild(heart);
 			}

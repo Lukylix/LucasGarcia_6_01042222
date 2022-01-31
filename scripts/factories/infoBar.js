@@ -10,7 +10,7 @@ function infoBarFactory(photographer, media) {
 		const likesElem = document.createElement("p");
 		likesElem.textContent = likes + " ";
 		likesElem.className = "likes";
-		const heart = document.createElement("i");
+		const heart = document.createElement("span");
 		heart.className = "fas fa-heart";
 		likesElem.appendChild(heart);
 		infoBar.appendChild(likesElem);

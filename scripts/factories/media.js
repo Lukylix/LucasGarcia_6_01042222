@@ -33,7 +33,7 @@ function mediaFactory(media, name, index) {
 		mediaLikes.textContent = likes + " ";
 		mediaLikes.addEventListener("click", () => incrementLikes(id));
 		mediaLikes.setAttribute("aria-label", `${title}, likes`);
-		const heart = document.createElement("i");
+		const heart = document.createElement("span");
 		heart.className = "fas fa-heart";
 		mediaLikes.appendChild(heart);
 
