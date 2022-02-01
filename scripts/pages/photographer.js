@@ -1,13 +1,16 @@
 let photographersData;
 
 async function getPhotographer() {
+	// Get data from JSON file only once
 	if (!photographersData) {
 		const urlParams = new URLSearchParams(window.location.search);
 		const id = urlParams.get("id");
 		let photographersJson = await fetch("../../data/photographers.json");
 		photographersData = await photographersJson.json();
+		// Get the photographer data that matches the id
 		photographersData.photographer = photographersData.photographers.filter((photographer) => photographer.id == id)[0];
 		delete photographersData.photographers;
+		// Get the media data that matches the photographer id
 		photographersData.media = photographersData.media.filter((media) => media.photographerId == id);
 		photographersData.media.sort((a, b) => b.likes - a.likes);
 	}
@@ -69,6 +72,7 @@ async function displayContactName(photographer) {
 async function incrementLikes(mediaId) {
 	let orderBy = "";
 	const customSelectInputs = document.querySelectorAll(".custom-select input[type=radio]");
+	// Get the value of the radio button that is checked
 	for (const input of customSelectInputs) {
 		if (input.checked) {
 			orderBy = input.value;
@@ -80,6 +84,7 @@ async function incrementLikes(mediaId) {
 	for (const key in photographersData.media) {
 		if (photographersData.media[key].id === mediaId) {
 			photographersData.media[key].likes++;
+			// If the order has changed, prepare for a rerender of medias
 			if (
 				orderBy == "Popularité" &&
 				key > 0 &&
@@ -87,6 +92,7 @@ async function incrementLikes(mediaId) {
 			) {
 				orderHasChange = true;
 			} else {
+				// If the order has not changed, update the media like button
 				const likeButtonDom = document.querySelectorAll("#media-section figure figcaption button")[key];
 				likeButtonDom.textContent = photographersData.media[key].likes + " ";
 				const heart = document.createElement("span");
@@ -104,6 +110,7 @@ async function incrementLikes(mediaId) {
 
 async function init() {
 	const modals = document.querySelectorAll("dialog");
+	// prevent modal from closing when clicking on the modal content
 	modals.forEach((modal) => {
 		modal.addEventListener("click", (e) => e.stopPropagation());
 	});

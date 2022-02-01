@@ -5,22 +5,20 @@ const selectLabel = document.querySelector("#select-label");
 const labelsSelect = document.querySelectorAll(".dropdown label");
 const lastLabelSelect = document.querySelector(".dropdown label:last-child");
 
+// Accesibility : hide the select when focus is lost using keybord
 lastLabelSelect.addEventListener("keydown", (e) => {
-	if (e.key === "Tab") {
-		hide();
-	}
+	if (e.key === "Tab") hide();
 });
-
+// Accesibility : hide the select when focus is lost using mouse
 document.addEventListener("click", () => hide());
 
 labelsSelect.forEach((label) => {
 	label.addEventListener("keydown", (e) => {
 		if (e.key === "Enter") {
-			e.target.id = e.target.htmlFor;
+			// Select the coresponding radio button
 			const radioButton = document.querySelector(`input[id="${e.target.htmlFor}"]`);
 			radioButton.checked = true;
 			radioButton.dispatchEvent(new Event("change"));
-			setSelectTitle(e);
 		}
 	});
 });
@@ -40,6 +38,12 @@ function hide() {
 	selectButton.classList.remove("active");
 }
 
+function setSelectTitle(e) {
+	const labelText = document.querySelector(`label[for="${e.target.id}"]`).innerText;
+	selectLabel.innerText = labelText;
+	hide();
+}
+
 options.forEach((option) => {
 	option.addEventListener("change", (e) => {
 		const input = e.target;
@@ -50,9 +54,3 @@ options.forEach((option) => {
 		}
 	});
 });
-
-function setSelectTitle(e) {
-	const labelElement = document.querySelector(`label[for="${e.target.id}"]`).innerText;
-	selectLabel.innerText = labelElement;
-	hide();
-}

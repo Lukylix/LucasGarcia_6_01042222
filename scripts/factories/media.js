@@ -18,6 +18,7 @@ function mediaFactory(media, name, index) {
 		if (!!image) {
 			mediaImg = document.createElement("img");
 			mediaImg.setAttribute("src", picture);
+			mediaImg.setAttribute("alt", title);
 		}
 
 		let mediaVideo;
