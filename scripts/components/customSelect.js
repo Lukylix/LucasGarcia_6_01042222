@@ -1,3 +1,4 @@
+/* global changeMediaOrder */
 const selectButton = document.querySelector("#select-button");
 const select = document.querySelector("#dropdown");
 const options = document.querySelectorAll(".option");

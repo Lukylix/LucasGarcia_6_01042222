@@ -1,3 +1,4 @@
+/* global photographersData, mediaFactory */
 const carouselModal = document.getElementById("carousel_modal");
 carouselModal.addEventListener("click", closeCarouselModal);
 

@@ -1,4 +1,5 @@
 /* eslint-disable no-extra-boolean-cast */
+/* global openCarouselAt, incrementLikes */
 function mediaFactory(media, name, index) {
 	const { title, image, likes, video, id } = media;
 

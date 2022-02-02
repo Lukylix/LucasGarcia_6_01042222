@@ -1,3 +1,4 @@
+/* global photographerFactory */
 async function getPhotographers() {
 	let photographers = await fetch("../../data/photographers.json");
 	photographers = await photographers.json();

@@ -1,3 +1,4 @@
+/* global headerFactory, infoBarFactory, mediaFactory */
 let photographersData;
 
 async function getPhotographer() {
