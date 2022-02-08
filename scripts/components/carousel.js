@@ -35,6 +35,7 @@ async function openCarouselAt(index) {
 	const mediaCarouselCardDOM = mediaModel.getMediaCarouselCardDOM();
 	cardContainer.appendChild(mediaCarouselCardDOM);
 	displayCarouselModal();
+	closeCarousel.focus();
 }
 
 function displayCarouselModal() {
