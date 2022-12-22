@@ -30,12 +30,11 @@ h1 {
 }
 .photograph-header {
 	background-color: #fafafa;
-	height: 430px;
 	margin-bottom: 30px;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	align-items: center;
-	padding: 0 40px;
+	padding: 40px;
 }
 
 .photograph-header h1 {
@@ -57,10 +56,10 @@ h1 {
 }
 
 .photograph-header img {
-	height: 275px;
-	width: 275px;
+	aspect-ratio: 1;
+	width: min(275px, 100%);
 	border-radius: 50%;
-	justify-self: right;
+  justify-self: center;
 }
 
 .sortByLabel {
@@ -81,23 +80,20 @@ h1 {
 
 #media-section {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 	gap: 30px 135px;
 
 	padding: 30px 0px;
 }
-#media-section figure {
-	height: 462px;
-}
 
 #media-section figure img {
-	height: calc(100% - 50px);
+	aspect-ratio: 1;
 	width: 100%;
 	border-radius: 5px;
 }
 #media-section figure video {
-	height: calc(100% - 50px);
-	width: 100%;
+  aspect-ratio: 1;
+  width: 100%;
 	border-radius: 5px;
 }
 
@@ -146,7 +142,7 @@ h1 {
 	right: 0;
 	border-radius: 5px;
 	background-color: #db8876;
-	width: 35%;
+	width: min(700px, 100%);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -173,6 +169,7 @@ h1 {
 	font-size: 60px;
 	font-weight: normal;
 	text-align: left;
+  padding-right: 41px;
 }
 
 form {
@@ -180,11 +177,11 @@ form {
 	width: 100%;
 	flex-direction: column;
 	align-items: flex-start;
+  font-size: 30px;
 }
 
 form label {
 	color: #312e2e;
-	font-size: 30px;
 }
 
 form div {
@@ -200,7 +197,6 @@ form input {
 	height: 55px;
 	border: none;
 	border-radius: 5px;
-	font-size: 36px;
 	padding: 0 10px;
 }
 
@@ -218,4 +214,68 @@ form textarea {
 
 .price {
 	color: #757575;
+}
+
+@media (max-width: 1440px) {
+  
+  #main {
+    padding: 0 50px;
+  }
+  .logo {
+    margin-left: 50px;
+  }
+  #media-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 50px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .photograph-header {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 30px;
+  }
+  .photograph-header .contact_button{
+    order: 3;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  #main {
+    padding: 0 25px;
+  }
+  .logo {
+    margin-left: 25px;
+  }
+  #media-section {
+    grid-template-columns: 1fr;
+  }
+  .photograph-header {
+    grid-template-columns: 1fr;
+  }
+  .photograph-header .description {
+    text-align: center;
+  }
+  .photograph-header h1 {
+    font-size: 50px;
+  }
+  
+  .photograph-header .description {
+    font-size: 16px;
+  }
+  
+  .photograph-header .description .location {
+    font-size: 22px;
+  }
+  .contact_button {
+    font-size: 20px;
+  }
+  .modal header h2 {
+    font-size: 35px;
+    padding-right: 41px;
+  }
+  form {
+    font-size: 25px;
+  }
 }

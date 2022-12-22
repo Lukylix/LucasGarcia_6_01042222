@@ -19,10 +19,12 @@
 	transform: translateY(-50%);
 	background-color: transparent;
 	border: none;
+  max-width: 100%;
+  max-height: 80vh;
+  column-gap: 20px;
 }
 
 .carousel button {
-	width: 80px;
 	font-size: 40px;
 	color: #901c1c;
 	background-color: transparent;
@@ -30,23 +32,21 @@
 }
 
 .card-container {
-	height: 80vh;
-	width: max-content;
+	max-height: inherit;
 }
 
 .card {
-	display: block;
-	height: 100%;
+	max-height: inherit;
 }
 
 .card img,
 .card video {
-	height: 100%;
+	max-height: inherit;
 }
 
 .carousel #close {
 	position: absolute;
-	right: 15px;
+	right: 16px;
 	top: 10px;
 }
 
@@ -55,4 +55,14 @@
 	font-weight: bold;
 	font-size: 28px;
 	color: #901c1c;
+}
+
+@media (max-width: 425px) {
+  .carousel button {
+    font-size: 30px;
+  }
+
+  .carousel {
+    column-gap: 5px;
+  }
 }
